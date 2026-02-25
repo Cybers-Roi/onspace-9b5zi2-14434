@@ -55,6 +55,7 @@ export default function RootLayout() {
                 <Stack.Screen name="passport" options={{ animation: 'slide_from_right', gestureEnabled: true }} />
                 <Stack.Screen name="command-center" options={{ animation: 'slide_from_right', gestureEnabled: true }} />
                 <Stack.Screen name="team-lobby" options={{ animation: 'slide_from_bottom', gestureEnabled: true }} />
+                <Stack.Screen name="story-viewer" options={{ animation: 'fade', gestureEnabled: true, presentation: 'fullScreenModal' }} />
               </Stack>
             </AuthGate>
           </AppProvider>
