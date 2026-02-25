@@ -1,0 +1,10 @@
+export const APP_NAME = 'EVENTFY';
+export const APP_TAGLINE = 'THE GAME HAS BEGUN';
+export const PLAYER_NUMBER = '#4821';
+export const PLAYER_NAME = 'Ahmed Benali';
+export const PLAYER_HANDLE = '@ahmed_dev';
+export const PLAYER_LEVEL = 7;
+export const PLAYER_TITLE = 'HACKATHON VETERAN';
+export const PLAYER_XP = 4820;
+export const PLAYER_XP_NEXT = 6000;
+export const PLAYER_AVATAR = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face';
