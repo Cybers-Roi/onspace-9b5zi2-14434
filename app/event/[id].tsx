@@ -465,17 +465,37 @@ export default function EventDetailScreen() {
 
       {/* Fixed Bottom Register Button */}
       <Animated.View style={[styles.bottomBar, btnStyle, { paddingBottom: insets.bottom + 12 }]}>
-        <Pressable
-          style={[styles.registerButton, isRegistered && styles.registeredButton]}
-          onPress={handleRegister}
-          disabled={isRegistered}
-        >
-          <Text style={styles.registerButtonText}>
-            {isRegistered
-              ? `YOU'RE IN ✓ — PLAYER ${'\u0023'}4821`
-              : 'ENTER THE GAME ○'}
-          </Text>
-        </Pressable>
+        <View style={styles.bottomActions}>
+          <Pressable
+            style={[styles.registerButton, isRegistered && styles.registeredButton]}
+            onPress={handleRegister}
+            disabled={isRegistered}
+          >
+            <Text style={styles.registerButtonText}>
+              {isRegistered
+                ? `YOU'RE IN ✓ — PLAYER ${'\u0023'}4821`
+                : 'ENTER THE GAME ○'}
+            </Text>
+          </Pressable>
+        </View>
+        {isRegistered && (
+          <View style={styles.bottomSecondary}>
+            <Pressable 
+              style={styles.secondaryActionBtn}
+              onPress={() => { Haptics.selectionAsync(); router.push('/qr-checkin'); }}
+            >
+              <Ionicons name="qr-code-outline" size={16} color={colors.teal} />
+              <Text style={styles.secondaryActionText}>CHECK IN</Text>
+            </Pressable>
+            <Pressable 
+              style={styles.secondaryActionBtn}
+              onPress={() => { Haptics.selectionAsync(); router.push('/volunteer-mode'); }}
+            >
+              <Ionicons name="hand-right-outline" size={16} color={colors.teal} />
+              <Text style={styles.secondaryActionText}>VOLUNTEER</Text>
+            </Pressable>
+          </View>
+        )}
       </Animated.View>
     </View>
   );
@@ -1283,6 +1303,29 @@ const styles = StyleSheet.create({
     borderTopColor: colors.border,
     paddingHorizontal: 16,
     paddingTop: 12,
+  },
+  bottomActions: {
+    marginBottom: 8,
+  },
+  bottomSecondary: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  secondaryActionBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    borderWidth: 1,
+    borderColor: colors.teal,
+    paddingVertical: 10,
+  },
+  secondaryActionText: {
+    fontFamily: fonts.body,
+    fontSize: 13,
+    fontWeight: '700',
+    color: colors.teal,
   },
   registerButton: {
     backgroundColor: colors.coral,

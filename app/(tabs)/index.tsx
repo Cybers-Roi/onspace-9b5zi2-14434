@@ -158,7 +158,10 @@ export default function FeedScreen() {
         </Pressable>
         <Pressable 
           style={[styles.tab, activeTab === 'international' && styles.tabActive]}
-          onPress={() => { setActiveTab('international'); Haptics.selectionAsync(); }}
+          onPress={() => { 
+            Haptics.selectionAsync(); 
+            router.push('/travel-mode');
+          }}
         >
           <Text style={[styles.tabText, activeTab === 'international' && styles.tabTextActive]}>INTERNATIONAL □</Text>
         </Pressable>

@@ -28,6 +28,14 @@ export default function OrgProfileScreen() {
   const org = organizations.find(o => o.id === id) || organizations[0];
   const isFollowed = followedOrgs.includes(org.id);
   const orgEvents = events.slice(0, 4);
+  
+  // Mock admin check - in real app, check user permissions
+  const isOrgAdmin = false; // Replace with actual permission check
+  
+  const handleFollow = () => {
+    Haptics.selectionAsync();
+    isFollowed ? unfollowOrg(org.id) : followOrg(org.id);
+  };
 
   const tabs: { key: OrgTab; label: string }[] = [
     { key: 'events', label: 'EVENTS' },
@@ -74,15 +82,24 @@ export default function OrgProfileScreen() {
           <View style={styles.actionRow}>
             <Pressable
               style={[styles.followBtn, isFollowed && styles.followedBtn]}
-              onPress={() => { Haptics.selectionAsync(); isFollowed ? unfollowOrg(org.id) : followOrg(org.id); }}
+              onPress={handleFollow}
             >
               <Text style={[styles.followText, isFollowed && { color: colors.base }]}>
                 {isFollowed ? 'FOLLOWING ✓' : 'FOLLOW +'}
               </Text>
             </Pressable>
-            <Pressable style={styles.notifyBtn}>
-              <Text style={styles.notifyText}>NOTIFY ME □</Text>
-            </Pressable>
+            {isOrgAdmin ? (
+              <Pressable 
+                style={[styles.notifyBtn, { backgroundColor: colors.neonPink, borderColor: colors.neonPink }]}
+                onPress={() => { Haptics.selectionAsync(); router.push('/command-center'); }}
+              >
+                <Text style={styles.notifyText}>COMMAND CENTER</Text>
+              </Pressable>
+            ) : (
+              <Pressable style={styles.notifyBtn}>
+                <Text style={styles.notifyText}>NOTIFY ME □</Text>
+              </Pressable>
+            )}
           </View>
 
           {/* Stats - 3 bordered boxes matching reference */}

@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { colors, fonts, eventTypeConfig } from '../../constants/theme';
 import { events, EventItem } from '../../services/mockData';
 import { useApp } from '../../contexts/AppContext';
@@ -35,8 +37,13 @@ export default function EventsScreen() {
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>MY EVENTS □</Text>
-        <Text style={styles.headerSub}>YOUR ARENAS</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.headerTitle}>MY EVENTS □</Text>
+          <Text style={styles.headerSub}>YOUR ARENAS</Text>
+        </View>
+        <Pressable onPress={() => { Haptics.selectionAsync(); router.push('/create-event'); }} style={styles.createBtn}>
+          <Ionicons name="add-circle-outline" size={24} color={colors.coral} />
+        </Pressable>
       </View>
 
       <View style={styles.tabRow}>
@@ -108,9 +115,17 @@ export default function EventsScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.surface },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 8,
+  },
+  createBtn: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerTitle: {
     fontFamily: fonts.body,

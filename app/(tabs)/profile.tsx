@@ -39,6 +39,18 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
+      {/* Header with Settings */}
+      <View style={styles.topHeader}>
+        <Text style={styles.topHeaderTitle}>MY PROFILE ◇</Text>
+        <View style={styles.topHeaderActions}>
+          <Pressable onPress={() => { Haptics.selectionAsync(); router.push('/scoreboard'); }} style={styles.iconBtn}>
+            <Ionicons name="trophy-outline" size={22} color={colors.white} />
+          </Pressable>
+          <Pressable onPress={() => { Haptics.selectionAsync(); router.push('/settings'); }} style={styles.iconBtn}>
+            <Ionicons name="settings-outline" size={22} color={colors.white} />
+          </Pressable>
+        </View>
+      </View>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: insets.bottom + 80 }}>
         {/* Header with floating shapes */}
         <View style={styles.profileHeader}>
@@ -162,6 +174,21 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.surface },
+
+  topHeader: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    paddingHorizontal: 16, paddingVertical: 12,
+    borderBottomWidth: 1, borderBottomColor: colors.border,
+  },
+  topHeaderTitle: {
+    fontFamily: fonts.body, fontSize: 18, fontWeight: '900', color: colors.white, letterSpacing: 0.5,
+  },
+  topHeaderActions: { flexDirection: 'row', gap: 10 },
+  iconBtn: {
+    width: 36, height: 36, borderRadius: 18,
+    backgroundColor: colors.surface2, borderWidth: 1, borderColor: colors.border,
+    alignItems: 'center', justifyContent: 'center',
+  },
 
   profileHeader: {
     alignItems: 'center',

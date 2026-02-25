@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Pressable, Dimensions } from 'react
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { colors, fonts } from '../constants/theme';
 import { PLAYER_NUMBER, PLAYER_LEVEL, PLAYER_AVATAR } from '../constants/config';
 import { HexAvatar } from '../components/ui/HexAvatar';
@@ -108,7 +109,11 @@ export default function PassportScreen() {
               <View style={styles.sectionLine} />
             </View>
             {timeline.map(item => (
-              <View key={item.id} style={styles.expRow}>
+              <Pressable 
+                key={item.id} 
+                style={styles.expRow}
+                onPress={() => { Haptics.selectionAsync(); router.push('/verify-cert'); }}
+              >
                 <View style={[styles.expDot, { borderColor: item.color }]}>
                   <Text style={[styles.expDotShape, { color: item.color }]}>{item.shape}</Text>
                 </View>
@@ -122,7 +127,7 @@ export default function PassportScreen() {
                     <Text style={styles.certLabel}>CERT ◇</Text>
                   </View>
                 )}
-              </View>
+              </Pressable>
             ))}
           </View>
 
